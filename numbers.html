@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IntellectIQ</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            flex-wrap: wrap;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            display: grid;
+            justify-content: center;
+            grid-template-columns: repeat(5, 100px);
+            grid-template-rows: repeat(2, 100px);
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+            padding: 40px 0px;
+        }
+
+        .container a{
+            font-weight: bold;
+            font-size: 30px;
+        }
+        
+        .box {
+            background-color: #ffc52a;
+            box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;            
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
+            border-radius: 15px;
+        }
+
+        .box:hover {
+            background-color: #ffc52a;
+        }
+
+        .box.correct {
+            background-color: #cc9d21;
+            color: white;
+        }
+
+        .shake {
+            animation: shake 0.5s;
+            animation-iteration-count: 1;
+        }
+
+        @keyframes shake {
+            0% {
+                transform: translate(1px, 1px) rotate(0deg);
+            }
+
+            10% {
+                transform: translate(-1px, -2px) rotate(-1deg);
+            }
+
+            20% {
+                transform: translate(-3px, 0px) rotate(1deg);
+            }
+
+            30% {
+                transform: translate(3px, 2px) rotate(0deg);
+            }
+
+            40% {
+                transform: translate(1px, -1px) rotate(1deg);
+            }
+
+            50% {
+                transform: translate(-1px, 2px) rotate(-1deg);
+            }
+
+            60% {
+                transform: translate(-3px, 1px) rotate(0deg);
+            }
+
+            70% {
+                transform: translate(3px, 1px) rotate(-1deg);
+            }
+
+            80% {
+                transform: translate(-1px, -1px) rotate(1deg);
+            }
+
+            90% {
+                transform: translate(1px, 2px) rotate(0deg);
+            }
+
+            100% {
+                transform: translate(1px, -2px) rotate(-1deg);
+            }
+        }
+
+        button {
+            display: inline-block;
+            outline: 0;
+            border: 0;
+            cursor: pointer;
+            background-color: white;
+            border-radius: 4px;
+            padding: 8px 16px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #e84d8a;
+            border: 1px solid #e84d8a;
+            line-height: 26px;
+            margin: 5px;
+        }
+
+        #center {
+            text-align: center;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.4);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 300px;
+            text-align: center;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            animation: showModal 0.3s ease-in-out;
+        }
+
+        @keyframes showModal {
+            from {
+                opacity: 0;
+                transform: scale(0.7);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container" id="container">
+        <a href="#" class="box">1</a>
+        <a href="#" class="box">2</a>
+        <a href="#" class="box">3</a>
+        <a href="#" class="box">4</a>
+        <a href="#" class="box">5</a>
+        <a href="#" class="box">6</a>
+        <a href="#" class="box">7</a>
+        <a href="#" class="box">8</a>
+        <a href="#" class="box">9</a>
+        <a href="#" class="box">10</a>
+    </div>
+
+    <div id="center">
+        <button id="skip">New Order</button>
+        <a href="menu.html"><button id="back">Back</button></a>
+    </div>
+
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>Wrong answer! Start again.</p>
+        </div>
+    </div>
+
+    <div id="winModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>Hurray, You won!</p>
+        </div>
+    </div>
+
+    <script>
+        let currentNumber = 1;
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function shakeScreen() {
+            document.body.classList.add('shake');
+            setTimeout(() => {
+                document.body.classList.remove('shake');
+            }, 500);
+        }
+
+        function showModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.style.display = "flex";
+        }
+
+        function hideModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.style.display = "none";
+        }
+
+        function resetGame() {
+            currentNumber = 1;
+            const container = document.getElementById('container');
+            const boxes = Array.from(container.children);
+            boxes.forEach(box => box.classList.remove('correct'));
+            shuffle(boxes);
+            boxes.forEach(box => container.appendChild(box));
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const audio = new Audio('ding.mp3');
+            const container = document.getElementById('container');
+            const boxes = Array.from(container.children);
+            shuffle(boxes);
+            boxes.forEach(box => container.appendChild(box));
+
+            boxes.forEach(box => {
+                box.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    if (parseInt(box.textContent) === currentNumber) {
+                        box.classList.add('correct');
+                        audio.play();
+                        currentNumber++;
+                        if (currentNumber > 10) {
+                            showModal('winModal');
+                            setTimeout(() => {
+                                hideModal('winModal');
+                                resetGame();
+                            }, 2000);
+                        }
+                    } else {
+                        shakeScreen();
+                        showModal('myModal');
+                        setTimeout(() => {
+                            hideModal('myModal');
+                            resetGame();
+                        }, 2000);
+                    }
+                });
+            });
+
+            document.getElementById('skip').addEventListener('click', resetGame);
+
+            document.querySelectorAll('.close').forEach(closeBtn => {
+                closeBtn.addEventListener('click', (event) => {
+                    const modal = event.target.closest('.modal');
+                    modal.style.display = 'none';
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
