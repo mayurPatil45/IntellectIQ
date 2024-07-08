@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,9 @@
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -33,26 +36,61 @@
         }
 
         #memory-button {
-            background-color:#64C5EB;
+            background-color: #64C5EB;
         }
 
         #attention-button {
-            background-color:#FEB326;
+            background-color: #FEB326;
         }
 
         #reason-button {
-            background-color:#e84d8a;
+            background-color: #e84d8a;
         }
 
-        #mathmatics-button {
-            background-color:#7f58af;
+        #mathematics-button {
+            background-color: #7f58af;
+        }
+
+        .animate-left {
+            animation: slideInLeft 1s forwards;
+        }
+
+        .animate-right {
+            animation: slideInRight 1s forwards;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
         }
     </style>
 </head>
+
 <body>
-    <a href="memory.html"><button id="memory-button">Memory</button></a> <br>
-    <a href="numbers.html"><button id="attention-button">Cognitive Flexibility</button></a> <br>
-    <a href="jumble.html"><button id="reason-button">Unjumble</button></a> <br>
-    <a href="function.html"><button id="mathmatics-button">Mathmatics</button></a> <br>
+    <div class="animate-left"><a href="memory.html"><button id="memory-button">Memory</button></a></div>
+    <div class="animate-right"><a href="numbers.html"><button id="attention-button">Cognitive Flexibility</button></a>
+    </div>
+    <div class="animate-left"><a href="jumble.html"><button id="reason-button">Unjumble</button></a></div>
+    <div class="animate-right"><a href="function.html"><button id="mathematics-button">Mathmatics</button></a></div>
 </body>
+
 </html>
