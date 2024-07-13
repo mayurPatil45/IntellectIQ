@@ -18,7 +18,10 @@
 
         body {
             width: 100%;
-            height: 100%;
+            height: 100vh;
+            background: url(./pexels-photo-998641.jpeg) no-repeat center center fixed;
+            background-size: cover;
+            font-family: "Poppins", sans-serif;
         }
 
         #hero {
@@ -29,52 +32,79 @@
             font-family: "Poppins", sans-serif;
             font-weight: 300;
             text-align: center;
-            background-color: white;
-            color: black;
+            color: rgb(255, 255, 255);
             padding: 0;
             line-height: 50px;
             position: absolute;
             top: 40vh;
+            background: none;
         }
 
-        #emoji{
+        #emoji {
             display: inline-block;
         }
 
         #accent {
-            color: #F16a70;
+            color: #009FBD;
             font-weight: 800;
+        }
+
+        .next {
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         button:not(#hero) {
             display: inline-block;
-            outline: 0;
+            outline: rgb(0, 0, 0) 0.8px;
             border: 0;
             cursor: pointer;
-            background-color: white;
+            background-color: #3DC2EC;
             border-radius: 4px;
             padding: 8px 16px;
             font-size: 16px;
             font-weight: 600;
-            color: #F16a70;            line-height: 26px;
+            color: #ffffff;
+            line-height: 26px;
             position: absolute;
             top: 60vh;
             width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: auto;
+            width: auto;
+            box-sizing: border-box;
+            text-decoration: none solid rgb(255, 255, 255);
+            border-radius: 8px;
+        }
+
+        button:not(#hero):hover {
+            background: #009FBD;
+            color: black;
+            box-shadow: 0 0 15px rgba(0, 159, 189, 0.6);
         }
 
         @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
                 transform: translateY(0);
             }
+
             40% {
                 transform: translateY(-30px);
             }
+
             60% {
                 transform: translateY(-15px);
             }
         }
 
-        /* Apply the bounce animation on hover */
         #emoji:hover {
             animation: bounce 1s;
         }
@@ -83,9 +113,9 @@
 
 <body>
     <button id="hero" disabled>
-        <span id="emoji">⚡</span><span id="accent">Intellect</span><strong>IQ</strong>
+        <span id="emoji">⚡</span><span id="accent">Intellect </span><strong>IQ</strong>
     </button>
-    <a href="menu.html"><button>Train Your Brain >></button></a>
+    <a href="menu.html" class="next"><button>Let's have fun >></button></a>
 </body>
 
 </html>

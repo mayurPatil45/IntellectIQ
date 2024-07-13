@@ -17,19 +17,32 @@
     <style>
         * {
             margin: 0;
+            box-sizing: border-box;
         }
 
         body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: "Poppins", sans-serif;
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            max-width: 800px;
             width: 100%;
-            height: 100%;
+            padding: 20px;
+            text-align: center;
+            box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
         }
 
         h1 {
             font-size: 12vh;
-            font-family: "Poppins", sans-serif;
             font-weight: 900;
-            font-style: normal;
-            text-align: center;
         }
 
         #word,
@@ -39,20 +52,15 @@
 
         #score {
             font-size: 5vh;
-            font-family: "Poppins", sans-serif;
             font-weight: 800;
-            font-style: normal;
-            text-align: center;
         }
 
         input {
             box-shadow: inset #e84d8a 0 0 0 2px;
             border: 0;
-            font-family: "Poppins", sans-serif;
             background: rgba(0, 0, 0, 0);
             appearance: none;
             width: 50vh;
-            position: relative;
             border-radius: 3px;
             padding: 9px 12px;
             line-height: 1.4;
@@ -62,8 +70,7 @@
             height: 40px;
             transition: all .2s ease;
             display: block;
-            margin-right: auto;
-            margin-left: auto;
+            margin: 20px auto;
 
             :hover {
                 box-shadow: 0 0 0 0 #fff inset, #1de9b6 0 0 0 2px;
@@ -89,6 +96,30 @@
             color: #e84d8a;
             border: 1px solid #e84d8a;
             line-height: 26px;
+            margin: 10px;
+            transition: box-shadow 0.3s ease-in-out;
+        }
+
+        button:hover {
+            box-shadow: 0 0 10px #e84d8a, 0 0 20px #e84d8a, 0 0 30px #e84d8a;
+        }
+
+        @keyframes glow {
+            0% {
+                box-shadow: 0 0 5px #e84d8a;
+            }
+
+            50% {
+                box-shadow: 0 0 20px #e84d8a;
+            }
+
+            100% {
+                box-shadow: 0 0 5px #e84d8a;
+            }
+        }
+
+        button:hover {
+            animation: glow 1s infinite alternate;
         }
 
         #center {
@@ -101,12 +132,14 @@
 </head>
 
 <body onload="newWord()">
-    <h1 id="word"></h1><br><br><br>
-    <input type="text">
-    <div id="center">
-        <p id="score">Score: 0</p>
-        <button id="skip">Skip</button>
-        <a href="menu.html"><button id="back">Back</button></a>
+    <div class="container">
+        <h1 id="word"></h1><br>
+        <input type="text">
+        <div id="center">
+            <p id="score">Score: 0</p>
+            <button id="skip">Skip</button>
+            <a href="menu.html"><button id="back">Back</button></a>
+        </div>
     </div>
 </body>
 <script>
