@@ -20,6 +20,10 @@
             width: 100%;
             height: 100%;
             font-family: "Poppins", sans-serif;
+            display: flex;
+            place-content: center;
+            place-items: flex-start center;
+            background: var(--bg);
         }
 
         #hero {
@@ -105,6 +109,54 @@
 
         #emoji:hover {
             animation: bounce 1s;
+        }
+
+        /* New CSS for rainbow background */
+
+        :root {
+            font-family: Inter, sans-serif;
+            --stripe-color: #fff;
+            --bg: var(--stripe-color);
+            --maincolor: var(--bg);
+        }
+
+        @keyframes smoothBg {
+            from {
+                background-position: 50% 50%, 50% 50%;
+            }
+            to {
+                background-position: 350% 50%, 350% 50%;
+            }
+        }
+
+        body {
+            width: 100cqw;
+            min-height: 100cqh;
+            display: flex;
+            place-content: center;
+            place-items: flex-start center;
+            background: var(--bg);
+            --stripes: repeating-linear-gradient(
+                100deg,
+                var(--stripe-color) 0%,
+                var(--stripe-color) 7%,
+                transparent 10%,
+                transparent 12%,
+                var(--stripe-color) 16%
+            );
+
+            --rainbow: repeating-linear-gradient(
+                100deg,
+                #60a5fa 10%,
+                #e879f9 15%,
+                #60a5fa 20%,
+                #5eead4 25%,
+                #60a5fa 30%
+            );
+            background-image: var(--stripes), var(--rainbow);
+            background-size: 300%, 200%;
+            background-position: 50% 50%, 50% 50%;
+            animation: smoothBg 60s linear infinite;
         }
     </style>
 </head>
