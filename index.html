@@ -124,6 +124,7 @@
             from {
                 background-position: 50% 50%, 50% 50%;
             }
+
             to {
                 background-position: 350% 50%, 350% 50%;
             }
@@ -136,23 +137,19 @@
             place-content: center;
             place-items: flex-start center;
             background: var(--bg);
-            --stripes: repeating-linear-gradient(
-                100deg,
-                var(--stripe-color) 0%,
-                var(--stripe-color) 7%,
-                transparent 10%,
-                transparent 12%,
-                var(--stripe-color) 16%
-            );
+            --stripes: repeating-linear-gradient(100deg,
+                    var(--stripe-color) 0%,
+                    var(--stripe-color) 7%,
+                    transparent 10%,
+                    transparent 12%,
+                    var(--stripe-color) 16%);
 
-            --rainbow: repeating-linear-gradient(
-                100deg,
-                #60a5fa 10%,
-                #e879f9 15%,
-                #60a5fa 20%,
-                #5eead4 25%,
-                #60a5fa 30%
-            );
+            --rainbow: repeating-linear-gradient(100deg,
+                    #60a5fa 10%,
+                    #e879f9 15%,
+                    #60a5fa 20%,
+                    #5eead4 25%,
+                    #60a5fa 30%);
             background-image: var(--stripes), var(--rainbow);
             background-size: 300%, 200%;
             background-position: 50% 50%, 50% 50%;
