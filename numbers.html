@@ -13,31 +13,41 @@
         rel="stylesheet">
     <style>
         body {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            flex-wrap: wrap;
-            align-items: center;
-            height: 100vh;
             margin: 0;
+            width: 100%;
+            height: 100%;
+            font-family: "Poppins", sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f0f0f0;
+            padding: 20px;
+            box-sizing: border-box;
         }
 
         .container {
-            display: grid;
+            width: 760px;
+            height: 760px;
+            display: flex;
+            flex-direction: column;
             justify-content: center;
-            grid-template-columns: repeat(5, 100px);
-            grid-template-rows: repeat(2, 100px);
-            max-width: 800px;
-            width: 100%;
-            gap: 10px;
-            margin-bottom: 20px;
-            padding: 40px 20px;
-            box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+            align-items: center;
+            position: relative;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            padding: 20px;
         }
 
-        .container a {
-            font-weight: bold;
-            font-size: 30px;
+        .container .main {
+            display: grid;
+            justify-content: center;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+            width: 100%;
+            padding: 20px;
         }
 
         .box {
@@ -50,10 +60,15 @@
             color: inherit;
             cursor: pointer;
             border-radius: 15px;
+            font-size: 2rem;
+            font-weight: bold;
+            padding: 20px;
+            transition: background-color 0.3s ease;
         }
 
         .box:hover {
-            background-color: #ffc52a;
+            background-color: #cc9d21;
+            color: white;
         }
 
         .box.correct {
@@ -153,6 +168,7 @@
 
         #center {
             text-align: center;
+            width: 100%;
         }
 
         .modal {
@@ -177,12 +193,11 @@
             width: 80%;
             max-width: 300px;
             text-align: center;
-            font: 50px;
+            font-size: 1.5rem;
             border-radius: 8px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
             animation: showModal 0.3s ease-in-out;
         }
-
 
         @keyframes showModal {
             from {
@@ -209,28 +224,67 @@
             color: black;
             text-decoration: none;
         }
+
+        @media screen and (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            .box {
+                font-size: 1.5rem;
+                padding: 15px;
+            }
+
+            .modal-content {
+                font-size: 1.25rem;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .container {
+                padding: 5px;
+            }
+
+            .box {
+                font-size: 1.25rem;
+                padding: 10px;
+            }
+
+            button {
+                font-size: 14px;
+                padding: 6px 12px;
+            }
+
+            .modal-content {
+                font-size: 1rem;
+                padding: 15px;
+            }
+        }
     </style>
 </head>
 
 <body>
-    <div class="container" id="container">
-        <a href="#" class="box">1</a>
-        <a href="#" class="box">2</a>
-        <a href="#" class="box">3</a>
-        <a href="#" class="box">4</a>
-        <a href="#" class="box">5</a>
-        <a href="#" class="box">6</a>
-        <a href="#" class="box">7</a>
-        <a href="#" class="box">8</a>
-        <a href="#" class="box">9</a>
-        <a href="#" class="box">10</a>
-    </div>
+    <div class="container">
 
-    <div id="center">
-        <button id="skip">New Order</button>
-        <a href="menu.html"><button id="back">Back</button></a>
-    </div>
+        <div class="main" id="main">
+            <a href="#" class="box">1</a>
+            <a href="#" class="box">2</a>
+            <a href="#" class="box">3</a>
+            <a href="#" class="box">4</a>
+            <a href="#" class="box">5</a>
+            <a href="#" class="box">6</a>
+            <a href="#" class="box">7</a>
+            <a href="#" class="box">8</a>
+            <a href="#" class="box">9</a>
+            <a href="#" class="box">10</a>
+        </div>
 
+        <div id="center">
+            <button id="skip">New Order</button>
+            <a href="menu.html"><button id="back">Back</button></a>
+        </div>
+
+    </div>
     <div id="myModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
@@ -274,19 +328,19 @@
 
         function resetGame() {
             currentNumber = 1;
-            const container = document.getElementById('container');
-            const boxes = Array.from(container.children);
+            const main = document.getElementById('main');
+            const boxes = Array.from(main.children);
             boxes.forEach(box => box.classList.remove('correct'));
             shuffle(boxes);
-            boxes.forEach(box => container.appendChild(box));
+            boxes.forEach(box => main.appendChild(box));
         }
 
         document.addEventListener('DOMContentLoaded', () => {
             const audio = new Audio('ding.mp3');
-            const container = document.getElementById('container');
-            const boxes = Array.from(container.children);
+            const main = document.getElementById('main');
+            const boxes = Array.from(main.children);
             shuffle(boxes);
-            boxes.forEach(box => container.appendChild(box));
+            boxes.forEach(box => main.appendChild(box));
 
             boxes.forEach(box => {
                 box.addEventListener('click', (event) => {

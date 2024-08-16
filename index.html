@@ -14,32 +14,48 @@
     <style>
         * {
             margin: 0;
+            box-sizing: border-box;
         }
 
         body {
             width: 100%;
-            height: 100%;
+            height: 100vh;
             font-family: "Poppins", sans-serif;
             display: flex;
-            place-content: center;
-            place-items: flex-start center;
+            justify-content: center;
+            align-items: center;
             background: var(--bg);
+            padding: 20px;
+        }
+
+        #container {
+            width: 800px;
+            height: 800px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
         }
 
         #hero {
             width: 100%;
-            height: 50px;
+            height: auto;
             border: none;
-            font-size: 12vh;
+            font-size: 6vh;
             font-family: "Poppins", sans-serif;
             font-weight: 300;
             text-align: center;
             color: rgb(0, 0, 0);
             padding: 0;
-            line-height: 50px;
-            position: absolute;
-            top: 40vh;
+            line-height: 1.5;
             background: none;
+            margin: 20px 0;
         }
 
         #emoji {
@@ -47,7 +63,7 @@
         }
 
         #accent {
-            color: #009FBD;
+            color: #f9802d;
             font-weight: 800;
         }
 
@@ -55,35 +71,25 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            text-decoration: none;
         }
 
         button:not(#hero) {
-            display: inline-block;
             outline: rgb(0, 0, 0) 0.8px;
             border: 0;
             cursor: pointer;
-            background-color: #3DC2EC;
-            border-radius: 4px;
+            background-color: #53D769;
             padding: 8px 16px;
             font-size: 16px;
             font-weight: 600;
             color: #ffffff;
             line-height: 26px;
-            position: absolute;
-            top: 60vh;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: auto;
-            width: auto;
-            box-sizing: border-box;
-            text-decoration: none solid rgb(255, 255, 255);
             border-radius: 8px;
+            transition: all 0.3s ease;
         }
 
         button:not(#hero):hover {
-            background: #009FBD;
+            background: #46C263;
             color: black;
             box-shadow: 0 0 15px rgba(0, 159, 189, 0.6);
         }
@@ -111,8 +117,6 @@
             animation: bounce 1s;
         }
 
-        /* New CSS for rainbow background */
-
         :root {
             font-family: Inter, sans-serif;
             --stripe-color: #fff;
@@ -130,12 +134,7 @@
             }
         }
 
-        body {
-            width: 100cqw;
-            min-height: 100cqh;
-            display: flex;
-            place-content: center;
-            place-items: flex-start center;
+        #container {
             background: var(--bg);
             --stripes: repeating-linear-gradient(100deg,
                     var(--stripe-color) 0%,
@@ -155,14 +154,32 @@
             background-position: 50% 50%, 50% 50%;
             animation: smoothBg 60s linear infinite;
         }
+
+        @media (max-width: 600px) {
+            #container {
+                width: 100%;
+                padding: 15px;
+            }
+
+            #hero {
+                font-size: 4.5vh;
+            }
+
+            button:not(#hero) {
+                font-size: 14px;
+                padding: 6px 12px;
+            }
+        }
     </style>
 </head>
 
 <body>
-    <button id="hero" disabled>
-        <span id="emoji">⚡</span><span id="accent">Intellect </span><strong>IQ</strong>
-    </button>
-    <a href="menu.html" class="next"><button>Let's have fun >></button></a>
+    <div id="container">
+        <button id="hero" disabled>
+            <span id="emoji">⚡</span><span id="accent">Intellect </span><strong>IQ</strong>
+        </button>
+        <a href="menu.html" class="next"><button>Let's have fun >></button></a>
+    </div>
 </body>
 
 </html>
